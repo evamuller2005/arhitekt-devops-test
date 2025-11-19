@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Arhitekt.Data;
-
-
 public class ArhitektContext : IdentityDbContext<ApplicationUser>
 {
 
