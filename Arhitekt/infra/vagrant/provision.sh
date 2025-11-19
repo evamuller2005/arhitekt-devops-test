@@ -18,8 +18,8 @@ git clone https://github.com/evamuller2005/arhitekt-devops.git
 
 #se premaknem v project mapo
 cd arhitekt-devops/Arhitekt/
-dotnet tool install --global dotnet-ef --version 8.0.2
+sudo dotnet tool install --global dotnet-ef --version 8.0.2
 #dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
-dotnet ef database update
+sudo dotnet ef database update
 
-dotnet run &
+sudo dotnet run &
