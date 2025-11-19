@@ -1,0 +1,429 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="hero bg-dark text-center py-5">
+    <h1 style="color: #ECECEC; font-size: 3em; font-family: 'Cursive';">Welcome to Architect</h1>
+    <p class="lead" style="color: #B0B0B0;">Discover the finest architects and their most iconic projects.</p>
+</div>
+
+<style>
+    body {
+        background-color: #1C1C1C; /* tmno ozadje */
+        color: #ECECEC; /* barva teksta */
+    }
+
+    /* Hero section styling */
+    .hero {
+        background-color: #2D2D2D; /* Default hero background color */
+        border-radius: 8px; /* Optional: rounded corners */
+        margin: 20px; /* Space around the hero section */
+        padding: 40px; /* Space inside the hero section */
+        transition: background-color 0.3s ease; /* Smooth transition for changes */
+    }
+
+    .hero:hover {
+    background-color: #6A936C; /* Change color on hover */
+}
+
+    /* za kartice */
+    .card {
+        background-color: #2D2D2D; 
+        height: 500px;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+    }
+
+    /* za slikce */
+    .card-img-top {
+        height: 300px;
+        object-fit: cover; 
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    /* gumb  */
+    .btn-outline-primary {
+        border-color: #6A936C; 
+        color: #6A936C;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #6A936C;
+        color: #ECECEC;
+    }
+}
+</style>
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/tiny.jpg" class="card-img-top" alt="Project 1">
+                <div class="card-body">
+                    <h5 class="card-title">Tiny Holiday Home</h5>
+                    <p class="card-text">Carlo Scarpa</p>
+                    <a href="/Architect/1" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/four.jpg" class="card-img-top" alt="project 1">
+                <div class="card-body">
+                    <h5 class="card-title">Four Leaves Villa</h5>
+                    <p class="card-text">Jean Nouvel</p>
+                    <a href="/Architect/1" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/casan.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa N / Estudio GMARQ</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/valley.jpg" class="card-img-top" alt="Project 2">
+                <div class="card-body">
+                    <h5 class="card-title">Valley Villa / arches</h5>
+                    <p class="card-text">Known for sustainable and eco-friendly designs.</p>
+                    <a href="/Architect/2" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/piano.jpg" class="card-img-top" alt="Project 3">
+                <div class="card-body">
+                    <h5 class="card-title">Piano House / LINE architects</h5>
+                    <p class="card-text">Award-winning architect focusing on commercial spaces.</p>
+                    <a href="/Architect/3" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/quest.jpg" class="card-img-top" alt="project 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Quest / Strom Architects</h5>
+                    <p class="card-text">Known for sustainable and eco-friendly designs.</p>
+                    <a href="/Architect/2" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/backcountry.jpg" class="card-img-top" alt="project 3">
+                <div class="card-body">
+                    <h5 class="card-title">Back Country House / LTD Architectural Design Studio</h5>
+                    <p class="card-text">Award-winning architect focusing on commercial spaces.</p>
+                    <a href="/Architect/3" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/diya.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">DIYA / SPASM Design Architects</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/napoli.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Napoli Afragola Station / Zaha Hadid Architects</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/under.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Snøhetta - Under</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/chau.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">House in Chau Doc / NISHIZAWAARCHITECTS</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>   
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+         <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+                 <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+                 <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+                 <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="~/images/meztitla.jpg" class="card-img-top" alt="project 4">
+                <div class="card-body">
+                    <h5 class="card-title">Casa Meztitla / EDAA</h5>   
+                    <p class="card-text">Specializes in modern architecture and urban designs.</p>
+                    <a href="/Architect/4" class="btn btn-outline-primary">View Project</a>
+                </div>
+            </div>
+        </div>  
+
+    </div>
+</div>
