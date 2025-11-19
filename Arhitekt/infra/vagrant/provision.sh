@@ -19,7 +19,7 @@ git clone https://github.com/evamuller2005/arhitekt-devops.git
 #se premaknem v project mapo
 cd arhitekt-devops/Arhitekt/
 #sudo dotnet tool install --global dotnet-ef --version 8.0.2
-sudo -u vagrant -H dotnet tool install --global dotnet-ef --version 8.0.2
+#sudo -u vagrant -H dotnet tool install --global dotnet-ef --version 8.0.2
 
 # dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
 sudo dotnet ef database update
