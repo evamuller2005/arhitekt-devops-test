@@ -42,7 +42,7 @@
 - name: publish dotnet app
   command: dotnet publish -c Release -o /home/vagrant/arhitekt-published
   args:
-    chdir: /home/vagrant/arhitekt-devops/ArhitektApp/
+    chdir: /home/vagrant/arhitekt-devops
 
 - name: create systemd service
   copy:
