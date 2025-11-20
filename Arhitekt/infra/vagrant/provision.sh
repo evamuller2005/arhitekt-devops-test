@@ -14,6 +14,9 @@ sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL
 #počakam da se SQL Server postav
 sleep 30
 
+#zalaufam redis v dockerju
+sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
+
 #instaliram .net SDK
 sudo apt-get install -y dotnet-sdk-8.0
 
