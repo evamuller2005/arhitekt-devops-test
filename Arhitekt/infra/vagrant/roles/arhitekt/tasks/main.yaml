@@ -39,7 +39,36 @@
     repo: "https://github.com/evamuller2005/arhitekt-devops.git"
     dest: "/home/vagrant/arhitekt-devops"
 
-- name: zazeni app
-  command: dotnet run
+- name: publish dotnet app
+  command: dotnet publish -c Release -o /home/vagrant/arhitekt-published
   args:
-    chdir: /home/vagrant/arhitekt-devops/Arhitekt/
+    chdir: /home/vagrant/arhitekt-devops/ArhitektApp/
+
+- name: create systemd service
+  copy:
+    dest: /etc/systemd/system/arhitekt.service
+    content: |
+      [Unit]
+      Description=Arhitekt ASP.NET Core Application
+      After=network.target
+
+      [Service]
+      WorkingDirectory=/home/vagrant/arhitekt-published
+      ExecStart=/usr/bin/dotnet /home/vagrant/arhitekt-published/Arhitekt.dll
+      Restart=always
+      RestartSec=10
+      User=vagrant
+      Environment=ASPNETCORE_URLS=http://0.0.0.0:5059
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: reload systemd
+  command: systemctl daemon-reload
+
+- name: enable arhitekt service
+  systemd:
+    name: arhitekt.service
+    enabled: yes
+    state: started 
+
