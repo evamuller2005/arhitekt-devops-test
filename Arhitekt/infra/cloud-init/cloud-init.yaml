@@ -1,0 +1,56 @@
+#cloud-config
+
+package_update: true
+packages:
+  - docker.io
+  - dotnet-sdk-8.0
+  - git
+
+#kreiramo systemd service
+write_files:
+  - path: /etc/systemd/system/arhitekt.service
+    permissions: '0644'
+    owner: root:root
+    content: |
+      [Unit]
+      Description=Arhitekt ASP.NET Core App
+      After=network.target
+
+      [Service]
+      WorkingDirectory=/home/ubuntu/arhitekt-published
+      ExecStart=/usr/bin/dotnet /home/ubuntu/arhitekt-published/Arhitekt.dll
+      Restart=always
+      RestartSec=10
+      User=ubuntu
+      Environment=ASPNETCORE_URLS=http://0.0.0.0:5059
+
+      [Install]
+      WantedBy=multi-user.target
+
+runcmd:
+  #enablam in startam docker
+  - systemctl enable docker
+  - systemctl start docker
+
+  #run ms sql server
+  - docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2019-latest
+
+  #run redis
+  - docker run --name arhitekt-redis -p 6379:6379 -d redis:7
+
+  #cakamo na ms sql server
+  - sleep 40
+
+  #clone
+  - git clone https://github.com/evamuller2005/arhitekt-devops.git /home/ubuntu/arhitekt-devops
+
+  #publishamo projekt
+  - dotnet publish /home/ubuntu/arhitekt-devops/Arhitekt/Arhitekt.csproj -c Release -o /home/ubuntu/arhitekt-published
+
+  #nastavimo pravice
+  - chown -R ubuntu:ubuntu /home/ubuntu
+
+  #enablamo in startamo service
+  - systemctl daemon-reload
+  - systemctl enable arhitekt
+  - systemctl start arhitekt
