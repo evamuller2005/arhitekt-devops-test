@@ -3,7 +3,7 @@
 #updatam sistem
 sudo apt update -y
 
-##za bazo
+#za bazo
 sudo mysql -u root <<EOF
 CREATE DATABASE IF NOT EXISTS ArhitektDb;
 CREATE USER IF NOT EXISTS 'sa'@'localhost' IDENTIFIED BY 'Arhitekt2025';
@@ -25,17 +25,42 @@ EOF
 #instaliram .net SDK
 sudo apt-get install -y dotnet-sdk-8.0
 
-#clonam project v /home/vagrnat
-#cd /home/vagrant
-git clone https://github.com/evamuller2005/arhitekt-devops.git
+#clonam project na vm
+git clone https://github.com/evamuller2005/arhitekt-devops.git #gre v /home/vagrant/arhitekt-devops
 
-#se premaknem v mapo
-cd arhitekt-devops/Arhitekt/
 
-#ne rabm dotnet toolsov ker je to itak devtool, niti nerabm dbjev updatat ker migracije so sam pr spremmbi strukture baze
+#se premaknem v mapo da loh publisham
+cd /home/vagrant/arhitekt-devops/Arhitekt/
+
+#publisham dotnet app v arhitekt-published mapo
+dotnet publish -c Release -o /home/vagrant/arhitekt-published
+
+#ustvarim systemd service file
+sudo nano /etc/systemd/system/arhitekt.service <<EOF
+[Unit]
+Description=Arhitekt ASP.NET Core Application
+After=network.target
+
+[Service]
+WorkingDirectory=/home/vagrant/arhitekt-published
+ExecStart=/usr/bin/dotnet /home/vagrant/arhitekt-published/Arhitekt.dll
+Restart=always
+RestartSec=10
+User=vagrant
+Environment=ASPNETCORE_URLS=http://0.0.0.0:5059
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#startam in enablam service
+sudo systemctl daemon-reload
+sudo systemctl start arhitekt.service
+sudo systemctl enable arhitekt.service
+
 
 #zazenem app da runna na 
-sudo dotnet run 
+#sudo dotnet run 
 
 
 
