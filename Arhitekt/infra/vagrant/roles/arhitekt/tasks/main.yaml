@@ -50,7 +50,7 @@
     content: |
       [Unit]
       Description=Arhitekt ASP.NET Core Application
-      After=network.target
+      After=network.target docker.service docker.socket
 
       [Service]
       WorkingDirectory=/home/vagrant/arhitekt-published
