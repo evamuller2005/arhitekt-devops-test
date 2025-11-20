@@ -29,10 +29,6 @@ write_files:
       WantedBy=multi-user.target
 
 runcmd:
-  #nastavimo home in dotnet cli home
-  - export HOME=/home/ubuntu
-  - export DOTNET_CLI_HOME=/home/ubuntu
-
   #enablam in startam docker
   - systemctl enable docker
   - systemctl start docker
@@ -45,16 +41,13 @@ runcmd:
   - docker run --name arhitekt-redis -p 6379:6379 -d redis:7
 
   #cakamo na ms sql server
-  - until docker exec arhitekt-sql /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Arhitekt2025" -Q "SELECT 1" &> /dev/null; do
-      echo "Waiting for SQL Server to start..."
-      sleep 5
-    done
+  - sleep 40
 
   #clone
   - git clone https://github.com/evamuller2005/arhitekt-devops.git /home/ubuntu/arhitekt-devops
 
   #publishamo projekt
-  - dotnet publish /home/ubuntu/arhitekt-devops/Arhitekt/Arhitekt.csproj -c Release -o /home/ubuntu/arhitekt-published
+  - su - ubuntu -c "dotnet publish /home/ubuntu/arhitekt-devops/Arhitekt/Arhitekt.csproj -c Release -o /home/ubuntu/arhitekt-published"
 
   #nastavimo pravice
   - chown -R ubuntu:ubuntu /home/ubuntu
