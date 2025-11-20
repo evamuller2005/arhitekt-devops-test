@@ -23,7 +23,7 @@
     --name arhitekt-sql
     -d mcr.microsoft.com/mssql/server:2025-latest
   args:
-    creates: /var/lib/docker/containers
+    creates: /var/lib/docker/containers/arhitekt-sql
 
 - name: wait for ms sql server to start
   pause:
