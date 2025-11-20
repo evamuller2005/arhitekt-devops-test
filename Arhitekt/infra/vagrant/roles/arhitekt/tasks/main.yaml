@@ -29,6 +29,11 @@
   pause:
     seconds: 30
 
+- name: run redis
+  command: docker run -p 6379:6379 --name arhitekt-redis -d redis:7
+  args:
+    creates: /var/lib/docker/containers/arhitekt-redis    
+
 - name: install .net SDK
   apt:
     name: dotnet-sdk-8.0

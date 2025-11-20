@@ -2,6 +2,8 @@ using Arhitekt.Data;
 using Arhitekt.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,12 @@ var connectionString = builder.Configuration.GetConnectionString("ArhitektContex
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration["Redis:ConnectionString"];
+});
+
 
 // nadomesti stari .AddDbContext
 builder.Services.AddDbContext<ArhitektContext>(options =>
@@ -20,6 +28,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ArhitektContext>();
 var app = builder.Build();
+
 
 // Seed database using DbInitializer 
 if (args.Length == 0) // ne izvajaj med migracijami
