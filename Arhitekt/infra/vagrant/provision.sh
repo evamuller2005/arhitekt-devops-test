@@ -1,28 +1,31 @@
 #!/bin/bash
 
+#updatam sistem
 sudo apt update -y
+
+#installam docker, enablam, in startam
 sudo apt install -y docker.io
 sudo systemctl enable docker
 sudo systemctl start docker
 
-#zalaufamo MS SQL Server v dockerju
+#zalaufam MS-SQL server v dockerju
 sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2025-latest
 
-#počakamo da se SQL Server postavi
-sleep 25
+#počakam da se SQL Server postav
+sleep 30
 
-#instaliramo .net SDK
+#instaliram .net SDK
 sudo apt-get install -y dotnet-sdk-8.0
 
-#clonam o project v /home/vagrnat
-cd /home/vagrant
+#clonam project v /home/vagrnat
+#cd /home/vagrant
 git clone https://github.com/evamuller2005/arhitekt-devops.git
 
-#se premaknem v project mapo
+#se premaknem v mapo
 cd arhitekt-devops/Arhitekt/
-#sudo dotnet tool install --global dotnet-ef --version 8.0.2
-#sudo -u vagrant -H dotnet tool install --global dotnet-ef --version 8.0.2
 
-#sudo dotnet ef database update
+#ne rabm dotnet toolsov ker je to itak devtool, niti nerabm dbjev updatat ker migracije so sam pr spremmbi strukture baze
 
+#zazenem app da runna na 
 sudo dotnet run 
+

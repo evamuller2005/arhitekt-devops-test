@@ -1,0 +1,45 @@
+---
+- name: update packages
+  apt:
+    update_cache: yes
+
+- name: instaliraj docker
+  apt:
+    name: docker.io
+    state: present
+
+- name: enable docker 
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: run ms sql v dockerju
+  command: >
+    docker run -e "ACCEPT_EULA=Y"
+    -e "MSSQL_SA_PASSWORD=Arhitekt2025"
+    -e "MSSQL_PID=Developer"
+    -p 1433:1433
+    --name arhitekt-sql
+    -d mcr.microsoft.com/mssql/server:2025-latest
+  args:
+    creates: /var/lib/docker/containers
+
+- name: wait for ms sql server to start
+  pause:
+    seconds: 30
+
+- name: install .net SDK
+  apt:
+    name: dotnet-sdk-8.0
+    state: present
+
+- name: clone git repo
+  git:
+    repo: "https://github.com/evamuller2005/arhitekt-devops.git"
+    dest: "/home/vagrant/arhitekt-devops"
+
+- name: zazeni app
+  command: dotnet run
+  args:
+    chdir: /home/vagrant/arhitekt-devops/Arhitekt/
