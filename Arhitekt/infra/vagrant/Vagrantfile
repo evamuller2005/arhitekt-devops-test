@@ -2,16 +2,21 @@ Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/jammy64"
     config.vm.hostname = "arhitekt-vm"
 
+    #port forwarding
+    config.vm.network "forwarded_port", guest: 5059, host: 5059
+
+
     config.vm.provider "virtualbox" do |vb|
         vb.memory = 4096
         vb.cpus = 2
     end
 
-    #config.vm.provision "shell", path: "provision.sh"
+    # #shell provision
+    # config.vm.provision "shell", path: "provision.sh"
     
-    # Ansible provisioner
+    #ansible 
     config.vm.provision("ansible") do |ansible|
         ansible.playbook = "playbook.yaml"
     end
      
-end
+end 

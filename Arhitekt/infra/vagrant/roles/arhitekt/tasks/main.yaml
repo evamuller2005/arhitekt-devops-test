@@ -1,4 +1,3 @@
----
 - name: update packages
   apt:
     update_cache: yes
@@ -76,4 +75,3 @@
     name: arhitekt.service
     enabled: yes
     state: started 
-

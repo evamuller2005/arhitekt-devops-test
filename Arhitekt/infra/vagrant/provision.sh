@@ -21,7 +21,8 @@ sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
 sudo apt-get install -y dotnet-sdk-8.0
 
 #clonam project na vm
-git clone https://github.com/evamuller2005/arhitekt-devops.git #gre v /home/vagrant/arhitekt-devops
+git clone https://github.com/evamuller2005/arhitekt-devops.git
+#gre v /home/vagrant/arhitekt-devops
 
 #se premaknem v mapo da loh publisham
 cd /home/vagrant/arhitekt-devops/Arhitekt/
@@ -51,13 +52,6 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl start arhitekt.service
 sudo systemctl enable arhitekt.service
-
-
-#zazenem app da runna na 
-#sudo dotnet run 
-
-
-
 
 
 
