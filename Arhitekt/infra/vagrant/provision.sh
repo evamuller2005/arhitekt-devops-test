@@ -3,6 +3,9 @@
 #updatam sistem
 sudo apt update -y
 
+#instaliram mysql server
+sudo apt install -y mysql-server
+
 #za bazo
 sudo mysql -u root <<EOF
 CREATE DATABASE IF NOT EXISTS ArhitektDb;
@@ -36,7 +39,7 @@ cd /home/vagrant/arhitekt-devops/Arhitekt/
 dotnet publish -c Release -o /home/vagrant/arhitekt-published
 
 #ustvarim systemd service file
-sudo nano /etc/systemd/system/arhitekt.service <<EOF
+sudo tee /etc/systemd/system/arhitekt.service <<EOF
 [Unit]
 Description=Arhitekt ASP.NET Core Application
 After=network.target
