@@ -148,9 +148,9 @@ sudo systemctl status arhitekt.service
 
 #### virtualBox, vagrant, ansible
 
-sudo apt install -y virtualbox  
-sudo apt install -y vagrant  
-sudo apt install -y ansible  
+sudo apt install -y virtualbox   
+sudo apt install -y vagrant   
+sudo apt install -y ansible   
 
 #### run vagrant
 
