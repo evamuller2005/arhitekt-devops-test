@@ -48,6 +48,69 @@
   args:
     chdir: /home/vagrant/arhitekt-devops
 
+- name: install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: create ssl directory
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+    mode: '0755'
+
+- name: create self-signed certificate
+  command: >
+    openssl req -x509 -nodes -days 365
+    -newkey rsa:2048
+    -keyout /etc/nginx/ssl/arhitekt.key
+    -out /etc/nginx/ssl/arhitekt.crt
+    -subj "/C=SI/ST=LJ/L=LJ/O=Arhitekt/OU=DevOps/CN=arhitekt.local"
+  args:
+    creates: /etc/nginx/ssl/arhitekt.crt
+
+- name: configure nginx reverse proxy
+  copy:
+    dest: /etc/nginx/sites-available/arhitekt
+    content: |
+      server {
+        listen 80;
+
+        location / {
+            proxy_pass http://127.0.0.1:5059;
+        }
+      }
+
+      server {
+          listen 443 ssl;
+
+          ssl_certificate     /etc/nginx/ssl/arhitekt.crt;
+          ssl_certificate_key /etc/nginx/ssl/arhitekt.key;
+
+          location / {
+              proxy_pass http://localhost:5059;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+          }
+      }
+
+- name: enable nginx config
+  command: ln -s /etc/nginx/sites-available/arhitekt /etc/nginx/sites-enabled/arhitekt
+  args:
+    creates: /etc/nginx/sites-enabled/arhitekt
+
+- name: remove default nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent    
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+
 - name: create systemd service
   copy:
     dest: /etc/systemd/system/arhitekt.service
@@ -63,6 +126,9 @@
       RestartSec=10
       User=vagrant
       Environment=ASPNETCORE_URLS=http://0.0.0.0:5059
+      Environment=ASPNETCORE_ENVIRONMENT=Production
+      Environment=ConnectionStrings__DefaultConnection=Server=localhost,1433;Database=Arhitekt;User Id=sa;Password=Arhitekt2025;TrustServerCertificate=True;
+      Environment=Redis__Host=localhost:6379
 
       [Install]
       WantedBy=multi-user.target
