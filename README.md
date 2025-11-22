@@ -66,26 +66,26 @@ Eva Müller:
 
 ## 1.Namesti odvisnosti
 
-Posodobi pakete:
+#### Posodobi pakete:
 
 sudo apt update
 sudo apt upgrade -y
 
-Namesti Docker:
+#### Namesti Docker:
 
 sudo apt install -y docker.io
 sudo systemctl enable docker
 sudo systemctl start docker
 
-Zaženi MSSQL:
+#### Zaženi MSSQL:
 
 sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2025-latest
 
-Zaženi Redis:
+#### Zaženi Redis:
 
 sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
 
-Namesti .NET SDK:
+#### Namesti .NET SDK:
 
 sudo apt install -y dotnet-sdk-8.0
 
@@ -105,7 +105,7 @@ dotnet ef database update
 
 dotnet run
 
-Aplikacija bo dostopna na http://localhost:5059
+#### Aplikacija bo dostopna na http://localhost:5059
 
 # Production način (publish + systemd service)
 
@@ -116,7 +116,7 @@ dotnet publish -c Release -o ~/arhitekt-published
 
 ## 2.Systemd service
 
-ustvari /etc/systemd/system/arhitekt.service:
+#### ustvari /etc/systemd/system/arhitekt.service:
 
 [Unit]
 Description=Arhitekt ASP.NET Core Application
