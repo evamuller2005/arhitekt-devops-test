@@ -64,7 +64,7 @@ Eva Müller:
 
 # Development način
 
-## 1.Namesti odvisnosti
+## 1. Namesti odvisnosti
 
 #### Posodobi pakete:
 
@@ -89,32 +89,32 @@ sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
 
 sudo apt install -y dotnet-sdk-8.0
 
-## 2.Kloniraj projekt
+## 2. Kloniraj projekt
 
 git clone https://github.com/evamuller2005/arhitekt-devops.git
 cd arhitekt-devops/Arhitekt
 
-## 3.Izvedi migracije
+## 3. Izvedi migracije
 
 dotnet tool install --global dotnet-ef --version 8.0.2
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 dotnet ef database update
 
-## 4.Zaženi development
+## 4. Zaženi development
 
 dotnet run
 
 #### Aplikacija bo dostopna na http://localhost:5059
 
-# Production način (publish + systemd service)
+# Production način
 
-## 1.Publish aplikacije
+## 1. Publish aplikacije
 
 cd ~/arhitekt-devops
 dotnet publish -c Release -o ~/arhitekt-published
 
-## 2.Systemd service
+## 2. Systemd service
 
 #### ustvari /etc/systemd/system/arhitekt.service:
 
@@ -144,5 +144,24 @@ sudo systemctl enable arhitekt.service
 sudo systemctl start arhitekt.service
 sudo systemctl status arhitekt.service
 
-# DevOps način (Vagrant + Ansible)
+# DevOps Deployment (Vagrant + Ansible)
 
+Navodila za Ubuntu 22.04 / 24.04
+
+## Namestitev paketov
+
+#### 1. VirtualBox
+
+sudo apt install -y virtualbox
+
+#### 2. Vagrant
+
+sudo apt install -y vagrant
+
+#### 3. Ansible
+
+sudo apt install -y ansible
+
+#### 4. Poženi vagrant
+
+vagrant up
