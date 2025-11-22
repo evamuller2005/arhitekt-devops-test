@@ -2,7 +2,7 @@
 
 # Avtorja  
 
-Gregor Vidrih - 63220356  
+Gregor Vidrih - 63220356    
 Eva Müller - 63220501  
 
 # Cilji in Opis
@@ -68,36 +68,36 @@ Eva Müller:
 
 #### Posodobi pakete:
 
-sudo apt update
-sudo apt upgrade -y
+sudo apt update  
+sudo apt upgrade -y  
 
 #### Namesti Docker:
 
-sudo apt install -y docker.io
-sudo systemctl enable docker
-sudo systemctl start docker
+sudo apt install -y docker.io  
+sudo systemctl enable docker  
+sudo systemctl start docker  
 
 #### Zaženi MSSQL:
 
-sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2025-latest
+sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2025-latest  
 
 #### Zaženi Redis:
 
-sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
+sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7  
 
 #### Namesti .NET SDK:
 
-sudo apt install -y dotnet-sdk-8.0
+sudo apt install -y dotnet-sdk-8.0  
 
 ## 2. Kloniraj projekt
 
-git clone https://github.com/evamuller2005/arhitekt-devops.git
-cd arhitekt-devops/Arhitekt
+git clone https://github.com/evamuller2005/arhitekt-devops.git  
+cd arhitekt-devops/Arhitekt  
 
 ## 3. Izvedi migracije
 
-dotnet tool install --global dotnet-ef --version 8.0.2
-export PATH="$PATH:$HOME/.dotnet/tools"
+dotnet tool install --global dotnet-ef --version 8.0.2  
+export PATH="$PATH:$HOME/.dotnet/tools"  
 
 dotnet ef database update
 
@@ -111,15 +111,15 @@ dotnet run
 
 ## 1. Publish aplikacije
 
-cd ~/arhitekt-devops
-dotnet publish -c Release -o ~/arhitekt-published
+cd ~/arhitekt-devops  
+dotnet publish -c Release -o ~/arhitekt-published  
 
 ## 2. Systemd service
 
 #### ustvari /etc/systemd/system/arhitekt.service:
 
 [Unit]
-Description=Arhitekt ASP.NET Core Application
+Description=Arhitekt ASP.NET Core Application  
 After=network.target docker.service docker.socket
 
 [Service]
@@ -139,10 +139,10 @@ WantedBy=multi-user.target
 
 ## 3. Zaženi arhitekt.service
 
-sudo systemctl daemon-reload
-sudo systemctl enable arhitekt.service
-sudo systemctl start arhitekt.service
-sudo systemctl status arhitekt.service
+sudo systemctl daemon-reload  
+sudo systemctl enable arhitekt.service  
+sudo systemctl start arhitekt.service  
+sudo systemctl status arhitekt.service  
 
 # DevOps Deployment (Vagrant + Ansible)
 
