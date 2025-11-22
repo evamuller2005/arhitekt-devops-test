@@ -11,7 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ArhitektContext");
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
@@ -52,11 +55,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.MapRazorPages();
+app.UseAuthentication();
 app.UseAuthorization();
-// dodaj app.MapRazorPages(); (npr. za app.useAuthentication())
 app.MapRazorPages();
+
 
 app.MapControllerRoute(
     name: "default",
