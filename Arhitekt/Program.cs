@@ -26,11 +26,11 @@ builder.Services.AddStackExchangeRedisCache(options =>
 builder.Services.AddDbContext<ArhitektContext>(options =>
             options.UseSqlServer(connectionString));
 
-// prilagodi RequireConfirmedAccount = false in .AddRoles<IdentityRole>()
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ArhitektContext>();
-var app = builder.Build();
+// // prilagodi RequireConfirmedAccount = false in .AddRoles<IdentityRole>()
+// builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+//     .AddRoles<IdentityRole>()
+//     .AddEntityFrameworkStores<ArhitektContext>();
+// var app = builder.Build();
 
 
 // Seed database using DbInitializer 
@@ -55,9 +55,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();
+// app.UseAuthentication();
 app.UseAuthorization();
-app.MapRazorPages();
+// app.MapRazorPages();
 
 
 app.MapControllerRoute(

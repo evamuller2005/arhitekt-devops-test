@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KPk5SCeTQ1g=",
+  "dgSpecHash": "ngSkGehmoME=",
   "success": true,
-  "projectFilePath": "/Users/evamuller/Desktop/faks/devops/temp-arhitekt/Arhitekt/Arhitekt.csproj",
+  "projectFilePath": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/Arhitekt.csproj",
   "expectedPackageFiles": [
     "/Users/evamuller/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/evamuller/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
