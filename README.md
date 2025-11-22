@@ -41,14 +41,14 @@ Sistem je sestavljen iz:
    - Klik na projekt prikaže podrobnosti o njem.
 
 # Tehnologije
-Backend - ASP.NET Core 8
-Frontend	- Razor Pages / HTML / Bootstrap
-Podatkovna baza -	MSSQL Server (Docker)
-Cache	Redis 7 - (Docker)
-Avtentikacija - ASP.NET Identity
-ORM - Entity Framework Core
-DevOps - Vagrant + Ansible
-Containerji	- Docker
+- Backend - ASP.NET Core 8
+- Frontend	- Razor Pages / HTML / Bootstrap
+- Podatkovna baza -	MSSQL Server (Docker)
+- Cache	Redis 7 - (Docker)
+- Avtentikacija - ASP.NET Identity
+- ORM - Entity Framework Core
+- DevOps - Vagrant + Ansible
+- Containerji	- Docker
 
 # Izvedba Nalog
 
@@ -62,18 +62,31 @@ Eva Müller:
 - Objava spletne storitve v oblak.
 - Optimizacija vizualnih elementov spletne strani.
 
+# Development način
+
 ## 1.Namesti odvisnosti
+
+Posodobi pakete:
 
 sudo apt update
 sudo apt upgrade -y
+
+Namesti Docker:
 
 sudo apt install -y docker.io
 sudo systemctl enable docker
 sudo systemctl start docker
 
+Zaženi MSSQL:
+
 sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2025-latest
 
+Zaženi Redis:
+
 sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
+
+Namesti .NET SDK:
+
 sudo apt install -y dotnet-sdk-8.0
 
 ## 2.Kloniraj projekt
@@ -92,7 +105,7 @@ dotnet ef database update
 
 dotnet run
 
-aplikacija bo dostopna na http://localhost:5059
+Aplikacija bo dostopna na http://localhost:5059
 
 # Production način (publish + systemd service)
 
@@ -124,7 +137,7 @@ Environment=Redis__Host=localhost:6379
 [Install]
 WantedBy=multi-user.target
 
-
+## 3. Zaženi arhitekt.service
 
 sudo systemctl daemon-reload
 sudo systemctl enable arhitekt.service
