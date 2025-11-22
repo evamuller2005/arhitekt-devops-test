@@ -30,7 +30,7 @@ builder.Services.AddDbContext<ArhitektContext>(options =>
 // builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
 //     .AddRoles<IdentityRole>()
 //     .AddEntityFrameworkStores<ArhitektContext>();
-// var app = builder.Build();
+var app = builder.Build();
 
 
 // Seed database using DbInitializer 
