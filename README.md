@@ -64,8 +64,6 @@ Eva Müller:
 
 # Development način
 
-## 1. Namesti odvisnosti
-
 #### Posodobi pakete:
 
 sudo apt update  
@@ -89,32 +87,32 @@ sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
 
 sudo apt install -y dotnet-sdk-8.0  
 
-## 2. Kloniraj projekt
+#### Kloniraj projekt 
 
 git clone https://github.com/evamuller2005/arhitekt-devops.git  
 cd arhitekt-devops/Arhitekt  
 
-## 3. Izvedi migracije
+#### Izvedi migracije
 
 dotnet tool install --global dotnet-ef --version 8.0.2  
 export PATH="$PATH:$HOME/.dotnet/tools"  
 
 dotnet ef database update
 
-## 4. Zaženi development
+#### 4. Zaženi development
 
 dotnet run
 
-#### Aplikacija bo dostopna na http://localhost:5059
+##### Aplikacija bo dostopna na http://localhost:5059
 
 # Production način
 
-## 1. Publish aplikacije
+#### Publish aplikacije
 
 cd ~/arhitekt-devops  
 dotnet publish -c Release -o ~/arhitekt-published  
 
-## 2. Systemd service
+#### Systemd service
 
 #### ustvari /etc/systemd/system/arhitekt.service:
 
@@ -137,7 +135,7 @@ Environment=Redis__Host=localhost:6379
 [Install]
 WantedBy=multi-user.target
 
-## 3. Zaženi arhitekt.service
+#### Zaženi arhitekt.service
 
 sudo systemctl daemon-reload  
 sudo systemctl enable arhitekt.service  
