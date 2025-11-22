@@ -1,7 +1,16 @@
-# Ime Projekta
-Architect  
+# Arhitekt — Platforma za arhitekte
+
+Arhitekt je spletna platforma, ki arhitektom omogoča raziskovanje projektov, povezovanje z drugimi arhitekti, objavljanje lastnih del ter pregledovanje skupnosti.
+
+Sistem je sestavljen iz:
+- ASP.NET Core 8 web aplikacije
+- MSSQL podatkovne baze
+- Redis strežnika za caching / sessions
+- Docker containerjev
+- Vagrant + Ansible provisioning (DevOps setup)
 
 # Avtorja  
+
 Gregor Vidrih - 63220356  
 Eva Müller - 63220501  
 
@@ -33,31 +42,96 @@ Platforma omogoča arhitektom, da se povežejo, delijo projekte in sodelujejo pr
    - Iskanje po imenih projektov, arhitektih in ključnih besedah.  
    - Klik na projekt prikaže podrobnosti o njem.
 
-# Zaslonske slike
-<img width="1710" alt="Screenshot 2025-01-17 at 14 48 45" src="https://github.com/user-attachments/assets/458b3e35-5f84-447a-8e65-0e6658ceb5ed" />
-<img width="1710" alt="Screenshot 2025-01-17 at 14 46 51" src="https://github.com/user-attachments/assets/d5e641f1-b5dd-4063-9b3c-38fbdb82fe0d" />
-<img width="1710" alt="Screenshot 2025-01-17 at 14 47 08" src="https://github.com/user-attachments/assets/253e0bd0-ca06-4c3b-8982-e6cf76618136" />
-<img width="1710" alt="Screenshot 2025-01-17 at 14 48 17" src="https://github.com/user-attachments/assets/a88e7503-9af2-452c-8e7a-8e4e2ec8505a" />
-<img width="1710" alt="Screenshot 2025-01-17 at 14 48 37" src="https://github.com/user-attachments/assets/d970c7f4-7d26-4a16-997f-3fe209d1011b" />
-![66827](https://github.com/user-attachments/assets/ef062411-a021-4140-af1d-741e1c769776)
-
+# Tehnologije
+Backend - ASP.NET Core 8
+Frontend	- Razor Pages / HTML / Bootstrap
+Podatkovna baza -	MSSQL Server (Docker)
+Cache	Redis 7 - (Docker)
+Avtentikacija - ASP.NET Identity
+ORM - Entity Framework Core
+DevOps - Vagrant + Ansible
+Containerji	- Docker
 
 # Izvedba Nalog
 
 Gregor Vidrih:
-
 - Nastavitev podatkovne baze in implementacija avtentikacije uporabnikov.
 - Razvoj Android aplikacije in implementacija funkcionalnosti za iskanje projektov.
 - Razvoj sistema za dodajanje in prikazovanje projektov.
 
 Eva Müller:
-
 - Oblikovanje uporabniškega vmesnika spletne aplikacije, vključno z izgledom strani, prikazom slik in postavitvijo vsebine.
 - Objava spletne storitve v oblak.
 - Optimizacija vizualnih elementov spletne strani.
 
-# Podatkovni model
+## 1.Namesti odvisnosti
 
-![Diagram](https://github.com/user-attachments/assets/e316c31a-a103-4e33-acbb-8f21c6011a72)
+sudo apt update
+sudo apt upgrade -y
 
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+
+sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2025-latest
+
+sudo docker run -p 6379:6379 --name arhitekt-redis -d redis:7
+sudo apt install -y dotnet-sdk-8.0
+
+## 2.Kloniraj projekt
+
+git clone https://github.com/evamuller2005/arhitekt-devops.git
+cd arhitekt-devops/Arhitekt
+
+## 3.Izvedi migracije
+
+dotnet tool install --global dotnet-ef --version 8.0.2
+export PATH="$PATH:$HOME/.dotnet/tools"
+
+dotnet ef database update
+
+## 4.Zaženi development
+
+dotnet run
+
+aplikacija bo dostopna na http://localhost:5059
+
+# Production način (publish + systemd service)
+
+## 1.Publish aplikacije
+
+cd ~/arhitekt-devops
+dotnet publish -c Release -o ~/arhitekt-published
+
+## 2.Systemd service
+
+ustvari /etc/systemd/system/arhitekt.service:
+
+[Unit]
+Description=Arhitekt ASP.NET Core Application
+After=network.target docker.service docker.socket
+
+[Service]
+WorkingDirectory=/home/vagrant/arhitekt-published
+ExecStart=/usr/bin/dotnet /home/vagrant/arhitekt-published/Arhitekt.dll
+Restart=always
+RestartSec=10
+User=vagrant
+
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://0.0.0.0:5059
+Environment=ConnectionStrings__DefaultConnection=Server=localhost,1433;Database=Arhitekt;User Id=sa;Password=Arhitekt2025;TrustServerCertificate=True;
+Environment=Redis__Host=localhost:6379
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+sudo systemctl daemon-reload
+sudo systemctl enable arhitekt.service
+sudo systemctl start arhitekt.service
+sudo systemctl status arhitekt.service
+
+# DevOps način (Vagrant + Ansible)
 
