@@ -1,6 +1,18 @@
 # Arhitekt — Platforma za arhitekte
 
+# Avtorja  
+
+Gregor Vidrih - 63220356  
+Eva Müller - 63220501  
+
+# Cilji in Opis
+
 Arhitekt je spletna platforma, ki arhitektom omogoča raziskovanje projektov, povezovanje z drugimi arhitekti, objavljanje lastnih del ter pregledovanje skupnosti.
+
+- Povezovanje arhitektov.
+- Deljenje idej in projektov.
+- Promocija dosežkov arhitektov.
+- Gradnja mreže strokovnjakov.
 
 Sistem je sestavljen iz:
 - ASP.NET Core 8 web aplikacije
@@ -8,20 +20,6 @@ Sistem je sestavljen iz:
 - Redis strežnika za caching / sessions
 - Docker containerjev
 - Vagrant + Ansible provisioning (DevOps setup)
-
-# Avtorja  
-
-Gregor Vidrih - 63220356  
-Eva Müller - 63220501  
-
-# Cilji in Opis
-- Povezovanje arhitektov.
-- Deljenje idej in projektov.
-- Promocija dosežkov arhitektov.
-- Gradnja mreže strokovnjakov.
-
-Arhitekt je platforma za arhitekte, kjer lahko iščejo druge arhitekte in raziskujejo njihove projekte.
-Platforma omogoča arhitektom, da se povežejo, delijo projekte in sodelujejo pri novih idejah.
 
 # Glavne funkcionalnosti
 
