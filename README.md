@@ -144,22 +144,16 @@ sudo systemctl status arhitekt.service
 
 # DevOps Deployment (Vagrant + Ansible)
 
-Navodila za Ubuntu 22.04 / 24.04
+- Navodila za Ubuntu 22.04 / 24.04
 
 ## Namestitev paketov
 
-#### 1. VirtualBox
+#### VirtualBox, Vagrant, Ansible
 
 sudo apt install -y virtualbox
-
-#### 2. Vagrant
-
 sudo apt install -y vagrant
-
-#### 3. Ansible
-
 sudo apt install -y ansible
 
-#### 4. Poženi vagrant
+#### run vagrant
 
 vagrant up
