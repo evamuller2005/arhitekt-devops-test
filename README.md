@@ -146,13 +146,11 @@ sudo systemctl status arhitekt.service
 
 - Navodila za Ubuntu 22.04 / 24.04
 
-## Namestitev paketov
+#### virtualBox, vagrant, ansible
 
-#### VirtualBox, Vagrant, Ansible
-
-sudo apt install -y virtualbox
-sudo apt install -y vagrant
-sudo apt install -y ansible
+sudo apt install -y virtualbox  
+sudo apt install -y vagrant  
+sudo apt install -y ansible  
 
 #### run vagrant
 
