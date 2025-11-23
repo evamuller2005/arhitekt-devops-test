@@ -141,3 +141,26 @@
     name: arhitekt.service
     enabled: yes
     state: started 
+
+
+- name: create guac network
+  command: docker network create guac-net
+  args:
+    creates: /var/lib/docker/network/files/guac-net
+
+- name: run guacd (guacamole backend)
+  command: >
+    docker run --name guacd --network guac-net
+    -d guacamole/guacd
+  args:
+    creates: /var/lib/docker/containers/guacd
+
+- name: run guacamole (web ui)
+  command: >
+    docker run --name guacamole --network guac-net
+    -e GUACD_HOSTNAME=guacd
+    -e MYSQL_HOST=none
+    -p 8080:8080
+    -d guacamole/guacamole
+  args:
+    creates: /var/lib/docker/containers/guacamole
