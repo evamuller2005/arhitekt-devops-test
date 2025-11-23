@@ -14,6 +14,7 @@ public class ArhitektContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.Entity<Project>().ToTable("Project");
     }
 }
