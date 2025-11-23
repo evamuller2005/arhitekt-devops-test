@@ -1,7 +1,6 @@
 using Arhitekt.Data;
 using Arhitekt.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 
 
