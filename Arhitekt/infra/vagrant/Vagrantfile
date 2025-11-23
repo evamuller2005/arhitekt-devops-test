@@ -13,7 +13,8 @@ Vagrant.configure("2") do |config|
 
     #cloud-init file injection
     config.vm.cloud_init :user_data do |ci|
-        ci.path = "cloud-init.yaml"
+        ci.path = "../cloud-init/cloud-init.yaml"
+        ci.content_type = "text/cloud-config"
     end        
 
     # #shell provision
