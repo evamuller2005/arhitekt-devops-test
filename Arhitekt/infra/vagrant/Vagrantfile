@@ -6,18 +6,22 @@ Vagrant.configure("2") do |config|
     #config.vm.network "forwarded_port", guest: 5059, host: 5059
     config.vm.network "private_network", ip: "192.168.56.10"
 
-
     config.vm.provider "virtualbox" do |vb|
         vb.memory = 4096
         vb.cpus = 2
     end
 
+    #cloud-init file injection
+    config.vm.cloud_init :user_data do |ci|
+        ci.path = "cloud-init.yaml"
+    end        
+
     # #shell provision
     # config.vm.provision "shell", path: "provision.sh"
     
     #ansible 
-    config.vm.provision("ansible") do |ansible|
-        ansible.playbook = "playbook.yaml"
-    end
+    # config.vm.provision("ansible") do |ansible|
+    #     ansible.playbook = "playbook.yaml"
+    # end
      
 end 

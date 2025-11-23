@@ -6,27 +6,113 @@ package_upgrade: false
 packages:
   - docker.io
   - git
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - nginx
+  - openssl
 
-# install dotnet manually (because SDK 8 isn't in standard apt repos)
 runcmd:
-  # install dependencies for dotnet
-  - apt-get install -y apt-transport-https ca-certificates curl
-
-  # add microsoft repo
+  # -----------------------------
+  # Install Microsoft repo + .NET
+  # -----------------------------
   - curl https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
   - dpkg -i /tmp/packages-microsoft-prod.deb
   - rm /tmp/packages-microsoft-prod.deb
   - apt-get update
   - apt-get install -y dotnet-sdk-8.0
 
+  # -----------------------------
+  # Enable + start Docker
+  # -----------------------------
+  - systemctl enable docker
+  - systemctl start docker
+
+  # -----------------------------
+  # Run SQL Server container
+  # -----------------------------
+  - docker run --name arhitekt-sql \
+      -e "ACCEPT_EULA=Y" \
+      -e "MSSQL_SA_PASSWORD=Arhitekt2025" \
+      -e "MSSQL_PID=Developer" \
+      -p 1433:1433 \
+      -d mcr.microsoft.com/mssql/server:2019-CU20-ubuntu-20.04
+  - sleep 40
+
+  # -----------------------------
+  # Run Redis container
+  # -----------------------------
+  - docker run --name arhitekt-redis -p 6379:6379 -d redis:7
+
+  # -----------------------------
+  # Clone Git repo
+  # -----------------------------
+  - git clone https://github.com/evamuller2005/arhitekt-devops-test.git /home/ubuntu/arhitekt
+  - chown -R ubuntu:ubuntu /home/ubuntu/arhitekt
+
+  # -----------------------------
+  # Publish .NET App
+  # -----------------------------
+  - sudo -u ubuntu dotnet publish /home/ubuntu/arhitekt/Arhitekt/Arhitekt.csproj -c Release -o /home/ubuntu/arhitekt-published
+  - chown -R ubuntu:ubuntu /home/ubuntu/arhitekt-published
+
+  # -----------------------------
+  # Create SSL certificates
+  # -----------------------------
+  - mkdir -p /etc/nginx/ssl
+  - openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+      -keyout /etc/nginx/ssl/arhitekt.key \
+      -out /etc/nginx/ssl/arhitekt.crt \
+      -subj "/C=SI/ST=LJ/L=LJ/O=Arhitekt/OU=DevOps/CN=arhitekt.local"
+
+  # -----------------------------
+  # Create NGINX reverse proxy
+  # -----------------------------
+  - |
+      cat <<EOF > /etc/nginx/sites-available/arhitekt
+      server {
+        listen 80;
+
+        location / {
+            proxy_pass http://127.0.0.1:5059;
+        }
+      }
+
+      server {
+          listen 443 ssl;
+
+          ssl_certificate     /etc/nginx/ssl/arhitekt.crt;
+          ssl_certificate_key /etc/nginx/ssl/arhitekt.key;
+
+          location / {
+              proxy_pass http://localhost:5059;
+              proxy_set_header Host \$host;
+              proxy_set_header X-Real-IP \$remote_addr;
+              proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto \$scheme;
+          }
+      }
+      EOF
+
+  - ln -s /etc/nginx/sites-available/arhitekt /etc/nginx/sites-enabled/arhitekt
+  - rm -f /etc/nginx/sites-enabled/default
+  - systemctl restart nginx
+
+  # -----------------------------
+  # Enable + start arhitekt service
+  # -----------------------------
+  - systemctl daemon-reload
+  - systemctl enable arhitekt
+  - systemctl start arhitekt
+
 write_files:
   - path: /etc/systemd/system/arhitekt.service
-    permissions: '0644'
     owner: root:root
+    permissions: '0644'
     content: |
       [Unit]
       Description=Arhitekt ASP.NET Core App
-      After=network.target docker.service
+      After=network.target docker.service docker.socket
       Requires=docker.service
 
       [Service]
@@ -36,33 +122,9 @@ write_files:
       RestartSec=10
       User=ubuntu
       Environment=ASPNETCORE_URLS=http://0.0.0.0:5059
+      Environment=ASPNETCORE_ENVIRONMENT=Production
+      Environment=ConnectionStrings__DefaultConnection=Server=localhost,1433;Database=Arhitekt;User Id=sa;Password=Arhitekt2025;TrustServerCertificate=True;
+      Environment=Redis__Host=localhost:6379
 
       [Install]
       WantedBy=multi-user.target
-
-runcmd:
-  # enable docker
-  - systemctl enable docker
-  - systemctl start docker
-
-  # SQL
-  - docker run --name arhitekt-sql --hostname sql1 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
-  - sleep 40
-
-  # Redis
-  - docker run --name arhitekt-redis -p 6379:6379 -d redis:7
-
-  # clone repo
-  - git clone https://github.com/evamuller2005/arhitekt-devops.git /home/ubuntu/arhitekt-devops
-  - chown -R ubuntu:ubuntu /home/ubuntu/arhitekt-devops
-
-  # publish
-  - sudo -u ubuntu dotnet publish /home/ubuntu/arhitekt-devops/Arhitekt/Arhitekt.csproj -c Release -o /home/ubuntu/arhitekt-published
-
-  # fix permissions
-  - chown -R ubuntu:ubuntu /home/ubuntu/arhitekt-published
-
-  # start
-  - systemctl daemon-reload
-  - systemctl enable arhitekt
-  - systemctl start arhitekt
