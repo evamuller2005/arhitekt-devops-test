@@ -57,6 +57,10 @@
       "PackagePath": "staticwebassets/images/crystal.jpg"
     },
     {
+      "Id": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/default.jpg",
+      "PackagePath": "staticwebassets/images/default.jpg"
+    },
+    {
       "Id": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/diya.jpg",
       "PackagePath": "staticwebassets/images/diya.jpg"
     },
@@ -163,10 +167,6 @@
     {
       "Id": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/wild.jpg",
       "PackagePath": "staticwebassets/images/wild.jpg"
-    },
-    {
-      "Id": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/xin.jpg",
-      "PackagePath": "staticwebassets/images/xin.jpg"
     },
     {
       "Id": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/zen.jpg",

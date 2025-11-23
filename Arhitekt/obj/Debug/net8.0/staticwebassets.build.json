@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rdAsSgqDSJRyOgFY2hHmZEnd4WYiw1JNCxHogUbIk6M=",
+  "Hash": "Joh4cPJoz3mKRTd2jAMvRpEmDabTMj4KpJJCOpjQcZ4=",
   "Source": "Arhitekt",
   "BasePath": "_content/Arhitekt",
   "Mode": "Default",
@@ -1442,6 +1442,25 @@
       "OriginalItemSpec": "wwwroot/images/crystal.jpg"
     },
     {
+      "Identity": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/default.jpg",
+      "SourceId": "Arhitekt",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/",
+      "BasePath": "_content/Arhitekt",
+      "RelativePath": "images/default.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/default.jpg"
+    },
+    {
       "Identity": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/diya.jpg",
       "SourceId": "Arhitekt",
       "SourceType": "Discovered",
@@ -1953,25 +1972,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/wild.jpg"
-    },
-    {
-      "Identity": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/xin.jpg",
-      "SourceId": "Arhitekt",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/",
-      "BasePath": "_content/Arhitekt",
-      "RelativePath": "images/xin.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/xin.jpg"
     },
     {
       "Identity": "/Users/evamuller/Desktop/arhitekt-devops-test/Arhitekt/wwwroot/images/zen.jpg",
