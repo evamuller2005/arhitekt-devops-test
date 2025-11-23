@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     # #shell provision
     # config.vm.provision "shell", path: "provision.sh"
     
-    ansible 
+    # ansible 
     config.vm.provision("ansible") do |ansible|
         ansible.playbook = "playbook.yaml"
     end
