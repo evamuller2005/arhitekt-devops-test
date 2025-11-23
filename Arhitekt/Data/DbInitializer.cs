@@ -12,45 +12,21 @@ namespace Arhitekt.Data
         {
             context.Database.EnsureCreated();
 
-            // Če že obstajajo projekti → ne delaj nič
             if (context.Projects.Any())
                 return;
 
             var projects = new Project[]
             {
-                new Project
-                {
-                    Name = "Piano House",
-                    Description = "Modern wooden house",
-                    DateCreated = DateTime.Now,
-                    Images = new List<string>
-                    {
-                        "/images/piano.jpg",
-                        "/images/piano2.jpg"
-                    }
-                },
-                new Project
-                {
-                    Name = "Courtyard House",
-                    Description = "Stylish minimal courtyard",
-                    DateCreated = DateTime.Now,
-                    Images = new List<string>
-                    {
-                        "/images/courtyard.jpg",
-                        "/images/collage.jpg"
-                    }
-                },
-                new Project
-                {
-                    Name = "Forest Villa",
-                    Description = "Nature-focused architecture",
-                    DateCreated = DateTime.Now,
-                    Images = new List<string>
-                    {
-                        "/images/bigwood.jpg",
-                        "/images/wild.jpg"
-                    }
-                }
+                new Project { Name="Tiny Holiday Home", Description="Modern tiny house", Images=new List<string>{"/images/tiny.jpg"} },
+                new Project { Name="Four Leaves Villa", Description="Organic shaped villa", Images=new List<string>{"/images/four.jpg"} },
+                new Project { Name="Casa N", Description="Estudio GMARQ project", Images=new List<string>{"/images/casan.jpg"} },
+                new Project { Name="Valley Villa", Description="Eco-friendly villa", Images=new List<string>{"/images/valley.jpg"} },
+                new Project { Name="Piano House", Description="LINE Architects", Images=new List<string>{"/images/piano.jpg", "/images/piano2.jpg"} },
+                new Project { Name="The Quest", Description="Strom Architects", Images=new List<string>{"/images/quest.jpg"} },
+                new Project { Name="Back Country House", Description="LTD Architectural", Images=new List<string>{"/images/backcountry.jpg"} },
+                new Project { Name="DIYA", Description="SPASM Design Architects", Images=new List<string>{"/images/diya.jpg"} },
+                new Project { Name="Napoli Station", Description="Zaha Hadid Architects", Images=new List<string>{"/images/napoli.jpg"} },
+                new Project { Name="Under", Description="Snøhetta underwater restaurant", Images=new List<string>{"/images/under.jpg"} }
             };
 
             context.Projects.AddRange(projects);

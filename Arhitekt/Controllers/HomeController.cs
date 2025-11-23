@@ -3,20 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using Arhitekt.Models;
 using Arhitekt.Data;
 
-
 namespace Arhitekt.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ArhitektContext _context;
+
     public HomeController(ArhitektContext context)
-        {
-            _context = context;
-        }
+    {
+        _context = context;
+    }
 
     public IActionResult Index()
     {
-        return View();
+        // Naloži 10 projektov iz baze
+        var projects = _context.Projects
+            .Take(10)
+            .ToList();
+
+        return View(projects);
     }
 
     public IActionResult Messages()
@@ -24,12 +29,12 @@ public class HomeController : Controller
         return View();
     }
 
-     public IActionResult Projects()
+    public IActionResult Projects()
     {
         return View();
     }
 
-     public IActionResult Search()
+    public IActionResult Search()
     {
         return View();
     }

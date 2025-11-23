@@ -1,12 +1,24 @@
 #cloud-config
 
 package_update: true
+package_upgrade: false
+
 packages:
   - docker.io
-  - dotnet-sdk-8.0
   - git
 
-#kreiramo systemd service
+# install dotnet manually (because SDK 8 isn't in standard apt repos)
+runcmd:
+  # install dependencies for dotnet
+  - apt-get install -y apt-transport-https ca-certificates curl
+
+  # add microsoft repo
+  - curl https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
+  - dpkg -i /tmp/packages-microsoft-prod.deb
+  - rm /tmp/packages-microsoft-prod.deb
+  - apt-get update
+  - apt-get install -y dotnet-sdk-8.0
+
 write_files:
   - path: /etc/systemd/system/arhitekt.service
     permissions: '0644'
@@ -29,30 +41,28 @@ write_files:
       WantedBy=multi-user.target
 
 runcmd:
-  #enablam in startam docker
+  # enable docker
   - systemctl enable docker
   - systemctl start docker
-  - sleep 30
 
-  #run ms sql server
-  - docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 --name arhitekt-sql -d mcr.microsoft.com/mssql/server:2025-latest
-
-  #run redis
-  - docker run --name arhitekt-redis -p 6379:6379 -d redis:7
-
-  #cakamo na ms sql server
+  # SQL
+  - docker run --name arhitekt-sql --hostname sql1 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Arhitekt2025" -e "MSSQL_PID=Developer" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
   - sleep 40
 
-  #clone
+  # Redis
+  - docker run --name arhitekt-redis -p 6379:6379 -d redis:7
+
+  # clone repo
   - git clone https://github.com/evamuller2005/arhitekt-devops.git /home/ubuntu/arhitekt-devops
+  - chown -R ubuntu:ubuntu /home/ubuntu/arhitekt-devops
 
-  #publishamo projekt
-  - su - ubuntu -c "dotnet publish /home/ubuntu/arhitekt-devops/Arhitekt/Arhitekt.csproj -c Release -o /home/ubuntu/arhitekt-published"
+  # publish
+  - sudo -u ubuntu dotnet publish /home/ubuntu/arhitekt-devops/Arhitekt/Arhitekt.csproj -c Release -o /home/ubuntu/arhitekt-published
 
-  #nastavimo pravice
-  - chown -R ubuntu:ubuntu /home/ubuntu
+  # fix permissions
+  - chown -R ubuntu:ubuntu /home/ubuntu/arhitekt-published
 
-  #enablamo in startamo service
+  # start
   - systemctl daemon-reload
   - systemctl enable arhitekt
   - systemctl start arhitekt
