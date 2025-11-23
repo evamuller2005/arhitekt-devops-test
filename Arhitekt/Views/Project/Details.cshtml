@@ -2,23 +2,44 @@
 
 <div class="container mt-5">
 
-    <h1 style="font-size: 2.5rem; color: #ECECEC;">@Model.Name</h1>
+    <!-- Title -->
+    <h1 style="font-size: 2.8rem; color: #ECECEC; font-family: 'Playfair Display', serif;">
+        @Model.Name
+    </h1>
 
-    <p style="color: #B0B0B0; font-size: 1.1rem;">
+    <!-- Underline -->
+    <div style="width:120px; height:4px; background:#6A936C; margin-bottom:25px; border-radius:2px;"></div>
+
+    <!-- Description -->
+    <p style="color: #B0B0B0; font-size: 1.2rem; max-width: 700px;">
         @Model.Description
     </p>
 
-    <p style="color: #6A936C; font-size: 0.9rem;">
-        Created on: @Model.DateCreated?.ToString("dd MMM yyyy")
-    </p>
+    <!-- Project info -->
+    <div style="
+        background:#2D2D2D;
+        padding:15px 20px;
+        border-left:4px solid #6A936C;
+        margin: 25px 0;
+        border-radius:6px;
+        max-width:500px;">
+        <p style="margin:0; color:#ECECEC;">
+            <strong style="color:#6A936C;">Created:</strong>
+            @Model.DateCreated?.ToString("dd MMM yyyy")
+        </p>
+    </div>
 
     <hr style="border-color:#6A936C" />
 
+    <!-- Images -->
     @if (Model.Images != null && Model.Images.Count > 0)
     {
-        <div class="text-center">
-            <img src="@Model.Images.First()" 
-                 style="width:80%; max-width:700px; border-radius:8px;" />
+        <div class="text-center mt-4">
+            @foreach (var img in Model.Images)
+            {
+                <img src="@img"
+                     style="width:80%; max-width:700px; border-radius:8px; margin-bottom:25px;" />
+            }
         </div>
     }
     else
@@ -26,10 +47,11 @@
         <p>No image available.</p>
     }
 
+    <!-- Back button -->
     <a asp-controller="Home"
        asp-action="Index"
        class="btn btn-outline-primary mt-4">
-       Back to Home
+        Back to Home
     </a>
 
 </div>
