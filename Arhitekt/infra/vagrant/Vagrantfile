@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-    config.vm.box = "canonical/ubuntu-24.04"
+    config.vm.box = "ubuntu/jammy64"
     config.vm.hostname = "arhitekt-vm"
 
     #port forwarding
@@ -11,18 +11,18 @@ Vagrant.configure("2") do |config|
         vb.cpus = 2
     end
 
-    #cloud-init file injection
-    config.vm.cloud_init :user_data do |ci|
-        ci.path = "../cloud-init/cloud-init.yaml"
-        ci.content_type = "text/cloud-config"
-    end        
+    # #cloud-init file injection
+    # config.vm.cloud_init :user_data do |ci|
+    #     ci.path = "../cloud-init/cloud-init.yaml"
+    #     ci.content_type = "text/cloud-config"
+    # end        
 
     # #shell provision
     # config.vm.provision "shell", path: "provision.sh"
     
-    #ansible 
-    # config.vm.provision("ansible") do |ansible|
-    #     ansible.playbook = "playbook.yaml"
-    # end
+    ansible 
+    config.vm.provision("ansible") do |ansible|
+        ansible.playbook = "playbook.yaml"
+    end
      
 end 
