@@ -1,18 +1,35 @@
 @model Arhitekt.Models.Project
 
-<h1>@Model.Name</h1>
-<p>@Model.Description</p>
+<div class="container mt-5">
 
-@if (Model.Images != null && Model.Images.Count > 0)
-{
-    <div>
-        @foreach (var img in Model.Images)
-        {
-            <img src="@img" style="width:300px;margin:10px;border-radius:8px;" />
-        }
-    </div>
-}
-else
-{
-    <p>No images available.</p>
-}
+    <h1 style="font-size: 2.5rem; color: #ECECEC;">@Model.Name</h1>
+
+    <p style="color: #B0B0B0; font-size: 1.1rem;">
+        @Model.Description
+    </p>
+
+    <p style="color: #6A936C; font-size: 0.9rem;">
+        Created on: @Model.DateCreated?.ToString("dd MMM yyyy")
+    </p>
+
+    <hr style="border-color:#6A936C" />
+
+    @if (Model.Images != null && Model.Images.Count > 0)
+    {
+        <div class="text-center">
+            <img src="@Model.Images.First()" 
+                 style="width:80%; max-width:700px; border-radius:8px;" />
+        </div>
+    }
+    else
+    {
+        <p>No image available.</p>
+    }
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-outline-primary mt-4">
+       Back to Home
+    </a>
+
+</div>

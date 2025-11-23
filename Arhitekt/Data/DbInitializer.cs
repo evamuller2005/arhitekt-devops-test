@@ -23,7 +23,7 @@ namespace Arhitekt.Data
                 new Project { Name="Valley Villa", Description="Eco-friendly villa", Images=new List<string>{"/images/valley.jpg"} },
                 new Project { Name="Piano House", Description="LINE Architects", Images=new List<string>{"/images/piano.jpg", "/images/piano2.jpg"} },
                 new Project { Name="The Quest", Description="Strom Architects", Images=new List<string>{"/images/quest.jpg"} },
-                new Project { Name="Back Country House", Description="LTD Architectural", Images=new List<string>{"/images/backcountry.jpg"} },
+                new Project { Name="Back Country House", Description="LTD Architectural", Images=new List<string>{"/images/back.jpg"} },
                 new Project { Name="DIYA", Description="SPASM Design Architects", Images=new List<string>{"/images/diya.jpg"} },
                 new Project { Name="Napoli Station", Description="Zaha Hadid Architects", Images=new List<string>{"/images/napoli.jpg"} },
                 new Project { Name="Under", Description="Snøhetta underwater restaurant", Images=new List<string>{"/images/under.jpg"} }
